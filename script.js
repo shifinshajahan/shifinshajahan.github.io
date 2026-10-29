@@ -29,7 +29,6 @@
     opts=opts||{};lastFocus=document.activeElement;stage.textContent='';
     dlg.classList.toggle('is-short',!!opts.short);
     ptitle.textContent=title||'';
-    dlg.classList.toggle('is-ig',kind==='instagram');
     pyt.href=opts.ytUrl||'https://www.youtube.com/@futureyes9955';pyt.hidden=!opts.ytUrl;pyt.textContent=opts.extLabel||'Open on YouTube \u2197';
     var m;
     if(kind==='youtube'){
@@ -38,12 +37,6 @@
       m.title=(title||'Video')+' (YouTube player)';
       m.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';m.allowFullscreen=true;
       m.referrerPolicy='strict-origin-when-cross-origin';
-    }else if(kind==='instagram'){
-      m=el('iframe');
-      m.src='https://www.instagram.com/reel/'+encodeURIComponent(src)+'/embed/';
-      m.title=(title||'Reel')+' (Instagram player)';
-      m.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';m.allowFullscreen=true;
-      m.referrerPolicy='strict-origin-when-cross-origin';m.setAttribute('scrolling','no');
     }else if(kind==='video'){
       m=el('video');m.src=src;m.controls=true;m.playsInline=true;m.preload='metadata';if(opts.poster)m.poster=opts.poster;
       m.addEventListener('error',function(){showMsg('This video could not be loaded.')});
@@ -59,11 +52,10 @@
     document.getElementById('player-x').addEventListener('click',closePlayer);
     dlg.addEventListener('click',function(e){if(e.target===dlg)closePlayer()});
     document.addEventListener('click',function(e){
-      var a=e.target.closest&&e.target.closest('a[data-yt],a[data-ig],a[data-img]');
+      var a=e.target.closest&&e.target.closest('a[data-yt],a[data-img]');
       if(!a||e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
       e.preventDefault();
-      if(a.hasAttribute('data-ig'))openPlayer('instagram',a.getAttribute('data-ig'),a.getAttribute('data-title'),{short:true,ytUrl:a.href,extLabel:'Open on Instagram \u2197'});
-      else if(a.hasAttribute('data-img'))openPlayer('image',a.getAttribute('href'),a.getAttribute('data-title'),{});
+      if(a.hasAttribute('data-img'))openPlayer('image',a.getAttribute('href'),a.getAttribute('data-title'),{});
       else openPlayer('youtube',a.getAttribute('data-yt'),a.getAttribute('data-title'),{short:a.hasAttribute('data-short'),ytUrl:a.href});
     });
   }

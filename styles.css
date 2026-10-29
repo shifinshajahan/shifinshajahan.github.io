@@ -249,8 +249,6 @@ a{color:inherit;text-decoration:none}
 .reel__play svg{width:24px;height:24px;color:#fff;margin-left:3px}
 .card--reel:hover .reel__play,.card--reel:focus-visible .reel__play{opacity:1;transform:scale(1);background:rgba(229,9,20,.9);border-color:transparent}
 @media (hover:none){.reel__play{opacity:.95;transform:scale(.8)}.card--reel:hover img{transform:none;filter:none}}
-.player.is-ig{width:min(400px,94vw)}
-.player.is-ig .player__stage iframe{aspect-ratio:auto;height:min(78vh,720px);background:#fff}
 @media (max-width:520px){
   .card--reel{width:46vw}
   .card--reel .card__title{font-size:21px}
